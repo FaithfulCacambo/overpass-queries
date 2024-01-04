@@ -1,0 +1,44 @@
+//@name USA/CA/BHMA Optimization II
+  
+[out:json][timeout:60];
+
+// Change the geocodeArea to modify the search area
+{{geocodeArea: Deep South}}->.searchArea;
+(
+//optimizaed code
+  rel["boundary"~"administrative|aboriginal_lands"]["admin_level"~"6|7|8|9|10"](area.searchArea);
+);
+out body;
+>;
+out skel qt;
+
+{{style: 
+relation [admin_level=10]
+{ color:Black; fill-color:LightGreen;  }
+relation [admin_level=9]
+{ color:Black; fill-color:LightGreen;  }
+relation [admin_level=8]
+  { color:Blue; fill-color:LightBlue;  }
+relation [admin_level=7]
+  {  color:Blue; fill-color:LightBlue;   }  
+relation [admin_level=6]
+  {  color:Blue; fill-color:LightBlue;   } 
+relation [boundary=aboriginal_lands]
+  { color:Black; fill-color:Yellow; }
+relation [place=city]
+{ color:Blue; fill-color:Orange; }
+relation [border_type=city]
+{ color:Blue; fill-color:Orange; }
+
+
+way [highway=primary]
+{ color:Black; }
+way [highway=motorway]
+{ color:Black; }
+way [highway=motorway_link]
+{ color:Black; }
+way [highway=secondary]
+{ color:Black; }
+way [highway=trunk]
+{ color:Black; }
+}}
