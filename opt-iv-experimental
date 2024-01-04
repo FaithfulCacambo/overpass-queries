@@ -1,0 +1,58 @@
+//@name USA/CA/BHMA Optimization IV TEST
+  
+[out:json][timeout:60];
+
+// Change the geocodeArea to modify the search area
+{{geocodeArea: Onondaga County, New York}}->.searchArea;
+(
+//optimizaed code
+  rel["boundary"~"administrative|census"] ["admin_level"~"7|8|9|10"](area.searchArea);
+  nwr["place"~"town|hamlet|locality|city"]["boundary"="census"](area.searchArea);
+  rel["admin_level"="6"](area.searchArea);
+  nwr["boundary" = "aboriginal_lands"](area.searchArea);
+);
+out body;
+>;
+out skel qt;
+
+{{style: 
+relation [admin_level=10]
+{ color:Black; fill-color:LightGreen;  }
+relation [admin_level=9]
+{ color:Black; fill-color:LightGreen;  }
+relation [admin_level=8]
+  { color:Blue; fill-color:LightBlue;  }
+relation [admin_level=7]
+  {  color:Blue; fill-color:LightBlue;   }  
+relation [place=town]
+  {  color:Blue; fill-color:LightBlue;   }  
+relation [place=hamlet]
+  {  color:Blue; fill-color:LightBlue;   }  
+relation [place=locality]
+  {  color:Blue; fill-color:LightBlue;   } 
+relation [boundary=census]
+  {  color:Blue; fill-color:LightBlue;   }  
+relation [place=city]
+  {  color:Blue; fill-color:Orange;   } 
+
+relation [admin_level=6]
+  {  color:Purple; fill-opacity:0.0;   } 
+relation [boundary=aboriginal_lands]
+  { color:Black; fill-color:Yellow; }
+relation [place=city]
+{ color:Blue; fill-color:Orange; }
+relation [border_type=city]
+{ color:Blue; fill-color:Orange; }
+
+
+way [highway=primary]
+{ color:Black; }
+way [highway=motorway]
+{ color:Black; }
+way [highway=motorway_link]
+{ color:Black; }
+way [highway=secondary]
+{ color:Black; }
+way [highway=trunk]
+{ color:Black; }
+}}
